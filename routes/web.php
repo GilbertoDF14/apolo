@@ -18,7 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 //$router->group(['middleware'=>['cors']], function() use($router){
-    //$router->get('/login/{user}/{pass}', 'AuthController@login');
+    $router->get('/login/{user}/{pass}', 'AuthController@login');
     
 //});
 
