@@ -17,7 +17,7 @@ class CreateCursosTable extends Migration
             $table->id();
             $table->string('profesor',30);
             $table->string('nombre',30);
-            $table->string('duracion',30);
+            $table->string('descripcion',300);
             $table->timestamps();
         });
     }

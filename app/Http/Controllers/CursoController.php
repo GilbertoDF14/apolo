@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class CursoController extends Controller
@@ -24,19 +25,25 @@ class CursoController extends Controller
         $this->validate($req, [
             'profesor'=>'required',
             'nombre'=>'required',
-            'duracion'=>'filled']);
+            'descripcion'=>'filled']);
 
         $datos = new Curso;
         $result = $datos->fill($req->all())->save();
-        if($result)
+        if($result){
             return response()->json(['status'=>'success'], 200);
-        else
+        }else{
             return response()->json(['status'=>'failed'], 404);
+        }
+    }
+
+    public function idret(){
+        $result=DB::select("select max(id) from cursos");
+        return $result;
     }
 
     public function update(Request $req, $id){
         $this->validate($req, [
-            'nombre'=>'filled','duracion'=>'filled']);
+            'nombre'=>'filled','descripcion'=>'filled']);
 
         $datos = Curso::find($id);
         if(!$datos) return response()->json(['status'=>'failed'], 404);

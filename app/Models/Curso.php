@@ -13,7 +13,7 @@ class Curso extends Model
     //public $incrementing = true;
 
     protected $fillable = [
-        'id', 'profesor','nombre','duracion'
+        'id', 'profesor','nombre','descripcion'
     ];
 
     protected $hidden = [

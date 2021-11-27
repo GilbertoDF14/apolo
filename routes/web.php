@@ -31,13 +31,14 @@ $router->group(['middleware'=>['auth']], function() use($router){
 
     $router->get('/curso', 'CursoController@index');
     $router->get('/curso/{id}', 'CursoController@get');
+    $router->get('/idcurso', 'CursoController@idret');
     $router->post('/curso', 'CursoController@create');
     $router->put('/curso/{id}', 'CursoController@update');
     $router->delete('/curso/{id}', 'CursoController@destroy');
 
-    $router->get('/mycourse', 'MiscursosController@index');
-    $router->get('/mycourse/{id_topic}', 'MiscursosController@get');
-    $router->post('/mycourse', 'MiscursosController@create');
-    $router->put('/mycourse/{id}', 'MiscursosController@update');
-    $router->delete('/mycourse/{id}', 'MiscursosController@destroy');
+    $router->get('/mycourses/{us}', 'MisCursosController@index');
+    $router->get('/mycourse/{id}', 'MisCursosController@get');
+    $router->post('/mycourse', 'MisCursosController@create');
+    $router->put('/mycourse/{id}', 'MisCursosController@update');
+    $router->delete('/mycourse/{id}', 'MisCursosController@destroy');
 });

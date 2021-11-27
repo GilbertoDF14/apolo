@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\MisCursos;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 
-class MiscursosController extends Controller
+class MisCursosController extends Controller
 {
-    public function index(){
-        return MisCursos::all();
+    public function index($us){
+        //return MisCursos::all();
+        //$result=DB::select("select * from miscursos where alumno = ?",[$us]);
+        $result=DB::select("select miscursos.id, cursos.id as cursoid, cursos.nombre, cursos.profesor, cursos.descripcion from miscursos,cursos where miscursos.curso=cursos.id and alumno = ?",[$us]);
+        return $result;
     }
 
     public function get($id){
