@@ -15,7 +15,7 @@ class CreateMiscursosTable extends Migration
     {
         Schema::create('miscursos', function (Blueprint $table) {
             $table->id();
-            $table->integer('curso');
+            $table->biginteger('curso');
             $table->string('alumno',30);
             $table->timestamps();
         });

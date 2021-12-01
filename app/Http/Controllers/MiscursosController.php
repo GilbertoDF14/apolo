@@ -30,7 +30,10 @@ class MisCursosController extends Controller
             'alumno'=>'required']);
 
         $datos = new MisCursos;
-        $result = $datos->fill($req->all())->save();
+        $datos->curso = $req->curso;
+        $datos->alumno = $req->alumno;
+        $result=DB::insert('insert into miscursos (curso,alumno) values (?,?)',[$datos->curso,$datos->alumno]);
+        //$result = $datos->fill($req->all())->save();
         if($result)
             return response()->json(['status'=>'success'], 200);
         else
@@ -51,14 +54,18 @@ class MisCursosController extends Controller
     }
 
     public function destroy($id){
-        
-        $datos = MisCursos::find($id);
-        if(!$datos) return response()->json(['status'=>'failed'], 404);
-        $result = $datos->delete();
-        if($result)
-            return response()->json(['status'=>'success'], 200);
-        else
+        //$datos = MisCursos::find($id);
+        $datos=DB::select("select * from miscursos where id = ?",[$id]);
+        if(!$datos) {
             return response()->json(['status'=>'failed'], 404);
+        }else{
+            $result = $datos->delete();
+            if($result){
+                return response()->json(['status'=>'success'], 200);
+            }else{
+                return response()->json(['status'=>'failed'], 404);
+            }
+        }    
     }
 
 }

@@ -22,7 +22,7 @@ $router->get('/', function () use ($router) {
     
 //});
 
-$router->group(['middleware'=>['auth']], function() use($router){
+//$router->group(['middleware'=>['auth']], function() use($router){
     $router->get('/usuario', 'UserController@index');
     $router->get('/usuario/{user}', 'UserController@get');
     $router->post('/usuario', 'UserController@create');
@@ -31,6 +31,7 @@ $router->group(['middleware'=>['auth']], function() use($router){
 
     $router->get('/curso', 'CursoController@index');
     $router->get('/curso/{id}', 'CursoController@get');
+    $router->get('/cursos/{us}', 'CursoController@getPr');
     $router->get('/idcurso', 'CursoController@idret');
     $router->post('/curso', 'CursoController@create');
     $router->put('/curso/{id}', 'CursoController@update');
@@ -38,7 +39,7 @@ $router->group(['middleware'=>['auth']], function() use($router){
 
     $router->get('/mycourses/{us}', 'MisCursosController@index');
     $router->get('/mycourse/{id}', 'MisCursosController@get');
-    $router->post('/mycourse', 'MisCursosController@create');
+    $router->post('/micurso', 'MisCursosController@create');
     $router->put('/mycourse/{id}', 'MisCursosController@update');
     $router->delete('/mycourse/{id}', 'MisCursosController@destroy');
-});
+//});

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(Request $req){
+    public function index(){
         //if($req->user()->rol != 'A') return response()->json(['status'=>'failed'], 401);
         return User::all();
     }
