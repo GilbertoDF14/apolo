@@ -22,12 +22,12 @@ class CursoController extends Controller
     }
 
     public function lista($id){
-        $result=DB::select("select user.user, user.nombre, user.apellidos from users,miscursos where miscursos.alumno=users.user and miscursos.curso=?",[$id]);
+        $result=DB::select("select miscursos.alumno, users.nombre, users.apellidos from users,miscursos where miscursos.alumno=users.user and miscursos.curso=?",[$id]);
         return $result;
     }
 
     public function indextemas($id){
-        $result=DB::select("select temas.id, temas.nombre from temas where temas.curso=?",[$id]);
+        $result=DB::select("select id, nombre from temas where curso=?",[$id]);
         return $result;
     }
 
@@ -50,6 +50,33 @@ class CursoController extends Controller
         }else{
             return response()->json(['status'=>'failed'], 404);
         }
+    }
+
+    public function createTema(Request $req){
+        $this->validate($req, [
+            'curso'=>'required',
+            'nombre'=>'required']);
+        $result = DB::insert("insert  into temas (curso,nombre)values (?,?)",[$req->curso,$req->nombre]);
+        if($result){
+            return response()->json(['status'=>'success'], 200);
+        }else{
+            return response()->json(['status'=>'failed'], 404);
+        }
+    }
+
+    public function destroyTema($id){
+        //$datos = MisCursos::find($id);
+        $datos=DB::select("select * from temas where id = ?",[$id]);
+        if(!$datos) {
+            return response()->json(['status'=>'failed'], 404);
+        }else{
+            $result = DB::delete('delete from temas where id=?',[$id]);
+            if($result){
+                return response()->json(['status'=>'success'], 200);
+            }else{
+                return response()->json(['status'=>'failed'], 404);
+            }
+        }  
     }
 
     public function idret(){

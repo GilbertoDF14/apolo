@@ -36,8 +36,10 @@ $router->get('/', function () use ($router) {
     $router->get('/lista/{id}', 'CursoController@lista');
     $router->get('/temas/{id}', 'CursoController@indextemas');
     $router->post('/curso', 'CursoController@create');
+    $router->post('/tema', 'CursoController@createTema');
     $router->put('/curso/{id}', 'CursoController@update');
     $router->delete('/curso/{id}', 'CursoController@destroy');
+    $router->delete('/tema/{id}', 'CursoController@destroyTema');
 
     $router->get('/mycourses/{us}', 'MisCursosController@index');
     $router->get('/mycourse/{id}', 'MisCursosController@get');
