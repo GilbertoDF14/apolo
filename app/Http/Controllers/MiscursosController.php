@@ -59,7 +59,7 @@ class MisCursosController extends Controller
         if(!$datos) {
             return response()->json(['status'=>'failed'], 404);
         }else{
-            $result = $datos->delete();
+            $result = DB::delete('delete from miscursos where id=?',[$id]);
             if($result){
                 return response()->json(['status'=>'success'], 200);
             }else{

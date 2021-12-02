@@ -33,6 +33,8 @@ $router->get('/', function () use ($router) {
     $router->get('/curso/{id}', 'CursoController@get');
     $router->get('/cursos/{us}', 'CursoController@getPr');
     $router->get('/idcurso', 'CursoController@idret');
+    $router->get('/lista/{id}', 'CursoController@lista');
+    $router->get('/temas/{id}', 'CursoController@indextemas');
     $router->post('/curso', 'CursoController@create');
     $router->put('/curso/{id}', 'CursoController@update');
     $router->delete('/curso/{id}', 'CursoController@destroy');

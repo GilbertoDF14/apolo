@@ -61,15 +61,19 @@ class UserController extends Controller
             return response()->json(['status'=>'failed'], 404);
     }
 
-    public function destroy(Request $req, $user){
+    public function destroy($user){
         //if($req->user()->rol != 'A') return response()->json(['status'=>'failed'], 401);
         $datos = User::find($user);
-        if(!$datos) return response()->json(['status'=>'failed'], 404);
-        $result = $datos->delete();
-        if($result)
-            return response()->json(['status'=>'success'], 200);
-        else
+        if(!$datos){
             return response()->json(['status'=>'failed'], 404);
+        }else{
+            $result = $datos->delete();
+            if($result){
+                return response()->json(['status'=>'success'], 200);
+            }else{
+                return response()->json(['status'=>'failed'], 404);
+            }
+        }
     }
 
 }

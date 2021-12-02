@@ -21,6 +21,16 @@ class CursoController extends Controller
             return response()->json(['status'=>'failed'], 404);
     }
 
+    public function lista($id){
+        $result=DB::select("select user.user, user.nombre, user.apellidos from users,miscursos where miscursos.alumno=users.user and miscursos.curso=?",[$id]);
+        return $result;
+    }
+
+    public function indextemas($id){
+        $result=DB::select("select temas.id, temas.nombre from temas where temas.curso=?",[$id]);
+        return $result;
+    }
+
     public function getPr($us){
         //$result = Curso::find($id);
         $result=DB::select("select * from cursos where profesor= ?",[$us]);
@@ -49,21 +59,15 @@ class CursoController extends Controller
 
     public function update(Request $req, $id){
         $this->validate($req, [
-            'profesor'=>'required','nombre'=>'filled','descripcion'=>'filled']);
+            //'profesor'=>'required',
+            'nombre'=>'filled','descripcion'=>'filled']);
         $datos = Curso::find($id);
-        //$datos->profesor = $req->profesor;
-        //$datos->nombre = $req->nombre;
-        //$datos->descripcion = $req->descripcion;
-        //$result=DB::update(
-        //    'update cursos set profesor=?, nombre=?,descripcion=? where id=?',
-        //    [$datos->profesor,$datos->nombre,$datos->descripcion,$id]
-        //);
         if(!$datos){
              return response()->json(['status'=>'failed'], 404);
         }else{
-            $result = $datos->fill($req->all())->save();      
+            $result = $datos->fill($req->all())->save();    
             if($result){
-                return response()->json(['status'=>'success'], 200);
+                return response()->json(['status'=>'success','cur'=>$datos->nombre], 200);
             }else{
                 return response()->json(['status'=>'failed'], 404);
             }
