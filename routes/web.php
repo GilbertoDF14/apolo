@@ -38,6 +38,7 @@ $router->get('/', function () use ($router) {
     $router->post('/curso', 'CursoController@create');
     $router->post('/tema', 'CursoController@createTema');
     $router->put('/curso/{id}', 'CursoController@update');
+    $router->put('/tema/{id}', 'TemaController@update');
     $router->delete('/curso/{id}', 'CursoController@destroy');
     $router->delete('/tema/{id}', 'CursoController@destroyTema');
 

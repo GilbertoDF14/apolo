@@ -101,6 +101,23 @@ class CursoController extends Controller
         }     
     }
 
+    public function updateTema(Request $req, $id){
+        $this->validate($req, [
+            'nombre'=>'filled']);
+        $datos = DB::select("select * from temas where id=?",[$id]);
+        //$datos->nombre=$req->nombre;
+        if(!$datos){
+             return response()->json(['status'=>'failed'], 404);
+        }else{
+            $result = DB::update("update cursos set nombre=? where id=?",[$req->nombre,$id]);    
+            if($result){
+                return response()->json(['status'=>'success'], 200);
+            }else{
+                return response()->json(['status'=>'failed'], 404);
+            }
+        }     
+    }
+
     public function destroy($id){
         
         $datos = Curso::find($id);
