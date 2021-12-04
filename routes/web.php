@@ -22,7 +22,7 @@ $router->get('/', function () use ($router) {
     
 //});
 
-//$router->group(['middleware'=>['auth']], function() use($router){
+$router->group(['middleware'=>['auth']], function() use($router){
     $router->get('/usuario', 'UserController@index');
     $router->get('/usuario/{user}', 'UserController@get');
     $router->post('/usuario', 'UserController@create');
@@ -47,4 +47,4 @@ $router->get('/', function () use ($router) {
     $router->post('/micurso', 'MisCursosController@create');
     $router->put('/mycourse/{id}', 'MisCursosController@update');
     $router->delete('/mycourse/{id}', 'MisCursosController@destroy');
-//});
+});

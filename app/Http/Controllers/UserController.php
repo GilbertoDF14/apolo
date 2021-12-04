@@ -45,20 +45,24 @@ class UserController extends Controller
     public function update(Request $req, $user){
         //if($req->user()->rol != 'A') return response()->json(['status'=>'failed'], 401);
         $this->validate($req, [
-            'user'=>'required',
-            'pass'=>'required', 
-            'nombre'=>'required',
-            'apellidos'=>'required',
-            'rol'=>'required']);
+            //'user'=>'required',
+            'pass'=>'filled', 
+            'nombre'=>'filled',
+            'apellidos'=>'filled',
+            'rol'=>'filled']);
 
         $datos = User::find($user);
         $datos->pass = Hash::make( $req->pass );
-        if(!$datos) return response()->json(['status'=>'failed'], 404);
-        $result = $datos->fill($req->all())->save();
-        if($result)
-            return response()->json(['status'=>'success'], 200);
-        else
+        if(!$datos) {
             return response()->json(['status'=>'failed'], 404);
+        }else{
+            $result = $datos->fill($req->all())->save();
+            if($result){
+                return response()->json(['status'=>'success'], 200);
+            }else{
+                return response()->json(['status'=>'failed'], 404);
+            }
+        }
     }
 
     public function destroy($user){
